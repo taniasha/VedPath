@@ -1,0 +1,459 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;  
+}
+
+#nav{
+  width:auto;
+  height:auto;
+  z-index:10000;
+}
+.navbar{
+  /* position:fixed; */
+  height:5rem;
+  width:100%;
+}
+.nav-link {
+  position: relative;
+  display: inline-block;
+  color: #252525;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2.3px;
+  left: 0;
+  bottom: 0;
+  background-color: rgb(100, 38, 38);
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+    .main-para {
+      font-size: 20px;
+      color: #333;
+    }
+    .main-content{
+      padding:4rem;
+      margin-top: 2.5rem;
+
+    }
+    /*----- --------------home.jsx------------- */
+    .home-image{
+      background-image: url('https://vediccosmos.com/wp-content/uploads/2023/04/Bhagavad-Gita-SE-600x600.png');
+      background-size: cover;
+      background-position: center;
+      height: 450px;
+      position: relative;
+    }
+
+    @keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    /* ------------Login------------- */
+/* Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  /* margin-top:3rem; */
+  /* background: linear-gradient(to bottom right, #f5e8c7, #fff7e6); */
+  font-family: 'Georgia', serif;
+}
+
+.login-form {
+  background-color: #fff2cc;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(172, 120, 30, 0.3);
+  width: 320px;
+  text-align: center;
+  border: 2px solid #c2a878;
+}
+.login-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #7b3f00;
+  font-weight: 500;
+}
+
+/* --------------books.jsx---------------------- */
+input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.6rem 0;
+  border: 1px solid #c2a878;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fffef9;
+}
+
+input:focus {
+  outline: none;
+  border-color: #a67c00;
+  box-shadow: 0 0 5px #e0b145;
+}
+
+ .login-container button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background-color: #a67c00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} 
+
+button:hover {
+  background-color: #8c6b00;
+}
+h5 {
+   margin-top:1rem;  
+}
+.card {
+  border-radius: 12px;
+  /* padding: 20px; */
+  border:none;
+  max-width: 18rem;
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 2px 12px 24px rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px);
+}
+.card {
+  overflow: hidden; /* prevents internal scrollbars */
+  display: flex;
+ background-color: #fdf8f1;
+   flex-direction: column;
+  justify-content: space-between;
+}
+
+.books-btn {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  overflow: hidden; /* hide overflow if needed */
+}
+
+.book-btn {
+  background-color: #775837;
+  color: white;
+  font-weight: 600;
+  flex: 1 1 45%;
+  max-width: 48%;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.book-btn:hover {
+  background-color: #755c43;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.03);
+  cursor: pointer;
+  color:whitesmoke;
+}
+/* --------------------dispay book-------------- */
+.display-book-container {
+  margin-top: 3rem;
+  background-color: #fff8e1;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-display-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-info {
+  padding:2rem;
+  margin-top:1rem;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #5e3b1e;
+}
+
+.book-author {
+  color: #6e4b3a;
+}
+
+.book-price {
+  font-size: 1.5rem;
+  color: #d4af37;
+  font-weight: 600;
+}
+
+.cart-button {
+  background-color: #a55d29;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cart-button:hover {
+  background-color: #683412;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #4e342e;
+}
+
+.about-author {
+  background: #fffdf4;
+  padding: 2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: #3e2723;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------------------------Trending----------------------- */
+.scroll-wrapper {
+  position: relative;
+  padding: 0 2rem;
+  overflow-x: hidden;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.trending-card {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.trending-card:hover {
+  transform: translateY(-5px);
+}
+
+
+/* ------------------------------------attractive section */
+
+.attractive-section {
+  background: linear-gradient(to right, #fffaf0, #fdf6e3);
+  padding: 3rem 1rem;
+  border-radius: 30px;
+}
+
+.image-card {
+ background-color: #fdf6e3;   border-radius: 30px;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #d4af37; 
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.image-card img {
+  border-radius: 20px;
+  transition: transform 0.4s ease;
+}
+
+.image-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.image-card img:hover {
+  transform: scale(1.05);
+}
+/* -------------------trendingdisplaybook.jsx--------- */
+/* Full-screen blurred overlay */
+.trending-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trending-card-popup {
+  max-width: 700px;
+  width: 90%;
+  background-color: white;
+  padding-right: 0.7rem;
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.trending-popup-content {
+  display: flex;
+  flex-direction: row;
+  /* gap: 1rem; */
+}
+
+.trending-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding:0%;
+  align-items: center;
+}
+
+.trending-left img {
+  max-height: 15rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.trending-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-title,
+.book-author,
+.book-price {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ✅ Responsive for small screens */
+@media (max-width: 600px) {
+  .trending-popup-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trending-left img {
+    max-height: 10rem;
+  }
+
+  .trending-right {
+    margin-top: 1rem;
+  }
+}
+.trending-close-btn{
+  border-radius:20%;
+  padding:0.4rem;
+  border: none;
+}
+
+
+/* ------------------------ 
+*/
+.page-heading {
+  /* font-size: 3rem; */
+  text-align: center;
+  /* margin-top: 30px; */
+  color: #3b221d;
+  animation: floatUp 1s ease-out infinite;
+}
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* -----------------wishlist----------- */
+.wishlist-icon{
+   position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+}
+.card:hover .wishlist-icon {
+  opacity: 1;
+}
