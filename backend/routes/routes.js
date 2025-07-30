@@ -6,6 +6,7 @@ const verifyToken = require('../middleware/verifyToken');
 const {addcart, userCart, deleteFromCart, deleteAllItemFromCart} = require('../controllers/cartControllers');
 const {toggleWishlist, userWishlist} = require('../controllers/wishlistControllers');
 const order = require('../controllers/orderControllers');
+const { createAudio, fetchAudio } = require('../controllers/audioControllers');
 
 // post - data bhejna ho ..from frontend to db 
 // get - data fetch krna ho ... example display krvana ko data db se frontend mein
@@ -32,5 +33,9 @@ router.get('/userwishlist/:userId', userWishlist);
 
 //Order
 router.post('/add-order', order);
+
+//Audio
+router.post('/create-audio', createAudio);
+router.get('/fetch-audio', fetchAudio);
 
 module.exports = router;

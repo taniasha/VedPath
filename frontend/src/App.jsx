@@ -21,6 +21,9 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Wishlist from './components/Wishlist';
 import Courses from './components/Courses';
+import AdminAudio from './admin/AdminAudio';
+import AudioLibrary from './components/AudioLibrary';
+import CallToAction from './components/CallToAction';
 
 function App() {
 
@@ -42,7 +45,7 @@ function App() {
         <CartProvider>
             <BrowserRouter>
               <Navbar />
-              <main className="content-wrapper">
+              <div className="content-wrapper">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
@@ -50,13 +53,17 @@ function App() {
                   <Route path="/books" element={<Books />} />
                   <Route path="/admin" element={<AdminBooks />} />
                   <Route path="/admintrending" element={<AdminTrending />} />
+                  <Route path="/adminaudio" element={<AdminAudio/>} />
+
                   <Route path="/book/:id" element={<DisplayBooks />} />
                   <Route path="/trending/:id" element={<DisplayTrendingBooks />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/wishlist" element={<Wishlist />} />
                   <Route path="/courses" element={<Courses/>}/>
+                  <Route path="/audio" element={<AudioLibrary/>}/>
+                  <Route path="/cta" element={<CallToAction/>}/>
                 </Routes>
-              </main>
+              </div>
               <Footer />
             </BrowserRouter>
         </CartProvider>

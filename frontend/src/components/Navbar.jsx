@@ -23,8 +23,8 @@ export default function Navbar() {
 
   const handleLogout=()=>{
      logout();
-     clearCart();
-     navigate("/")
+     clearCart();d
+    toast.success("You have been logged out.");
   }
 
   return (
@@ -48,17 +48,23 @@ export default function Navbar() {
                         <Link className="nav-link" to={"/books"}>Books</Link>
                         </li>
                         <li className="nav-item mx-3 fs-5">
+                        <Link className="nav-link" to={"/audio"}>Audio</Link>
+                        </li>
+                        <li className="nav-item mx-3 fs-5">
                         <Link className="nav-link" to={"/courses"}>Courses</Link>
                         </li>
-                        {isLoggedIn? 
-                          <li className="nav-item mx-3 fs-5">
-                            <Link className="nav-link" onClick={handleLogout}>Logout</Link>
-                          </li>  
-                          :    
-                          <li className="nav-item mx-3 fs-5">
-                            <Link className="nav-link" to={"/login"}>Login</Link>
-                          </li>
-                        }
+                        {isLoggedIn ? (
+                            <li className="nav-item mx-3 fs-5">
+                              <button className="nav-link btn btn-link p-1 mt-1" onClick={handleLogout}>
+                                Logout
+                              </button>
+                            </li>
+                          ) : (
+                            <li className="nav-item mx-3 fs-5">
+                              <Link className="nav-link" to="/login">Login</Link>
+                            </li>
+                          )}
+
                         <li className="nav-link mx-3 fs-5 dropdown"><a className="dropdown-toggle" style={{textDecoration:'none', color:'#252525'}} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           {isLoggedIn ? user.name :" My Account" }</a>
 

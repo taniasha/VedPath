@@ -54,11 +54,14 @@ html, body {
     }
     /*----- --------------home.jsx------------- */
     .home-image{
-      background-image: url('https://vediccosmos.com/wp-content/uploads/2023/04/Bhagavad-Gita-SE-600x600.png');
+      background-image: url('./assets/Vedpathbanner.png');
+      /* background-image: url('https://vediccosmos.com/wp-content/uploads/2023/04/Bhagavad-Gita-SE-600x600.png'); */
       background-size: cover;
       background-position: center;
-      height: 450px;
+      height: 500px;
       position: relative;
+        animation: zoom 15s infinite alternate ease-in-out;
+
     }
 
     @keyframes fadeInDown {
@@ -456,4 +459,90 @@ h5 {
 }
 .card:hover .wishlist-icon {
   opacity: 1;
+}
+
+
+
+/* ------------CTA_-------------- */
+.audio-banner {
+  position: relative;
+  width: 100%;
+  height: 600px; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+.audio-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  animation: zoom 20s infinite alternate ease-in-out;
+}
+
+.audio-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 2;
+  width: 90%;
+}
+
+.animated-glow-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #fdbb2d, #22c1c3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 2s infinite ease-in-out;
+}
+
+.animated-subtext {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  animation: fadeInUp 2s infinite alternate;
+}
+.listen-btn {
+  background-color: #252423;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.listen-btn:hover {
+  background-color: #24211e;
+  transform: scale(1.05);
+}
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(141, 53, 53, 0.6), 0 0 20px rgba(255, 0, 255, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 30px rgba(0, 255, 255, 0.7);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0.2;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }

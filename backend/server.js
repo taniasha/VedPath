@@ -12,6 +12,7 @@ const cartRoutes = require('../backend/routes/routes');
 const wishlistRoute = require('../backend/routes/routes');
 const connectMongo = require('./db');
 const orderRoute = require('../backend/routes/routes');
+const audioRoutes = require('../backend/routes/routes');
 
 // Middleware
 app.use(cors());
@@ -28,6 +29,7 @@ app.use('/trending', trendingRoutes);
 app.use('/cart', cartRoutes);
 app.use('/wishlist', wishlistRoute);
 app.use('/order', orderRoute);
+app.use('/audio', audioRoutes);
 
 connectMongo();
 
