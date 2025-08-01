@@ -47,8 +47,8 @@ export default function Trending() {
     <>
 
     {/* Trendingsection */}
-      <div className="trending-section mt-4 container" style={{overflow:'hidden'}}>
-        <h2 className="text-center mb-4 fw-bold page-heading" style={{color: theme==='dark' ? 'white': '#3E2723'}}> Trending Books</h2>
+      <div className="trending-section mt-5 mb-3 container" style={{overflow:'hidden'}}>
+        <h2 className="text-center mb-4 fw-bold page-heading" style={{color: theme==='dark' ? 'white': '#3E2723', fontFamily: "'Niconne', cursive", fontSize: '46px'}}> Trending Books</h2>
        {/* <h2 className="text-center mb-4 fw-bold d-flex align-items-center" style={{backgroundColor:'#3E2723', width:'100%', height:'3.5rem', color:'white'}}>🔥 Trending Books</h2> */}
 
          <div className="scroll-wrapper position-relative">

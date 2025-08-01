@@ -53,7 +53,7 @@ export default function AudioLibrary() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center text-primary mb-4">🎵 Audio Library</h2>
+      <h2 className="text-center text-dark mb-5">🎵 Listen to Mantras</h2>
       <div className="row justify-content-center align-items-center">
         {audios.map((audio) => (
           <div className="col-md-4 col-lg-4 col-sm-12 mb-4" key={audio._id}>
@@ -63,7 +63,7 @@ export default function AudioLibrary() {
                 <p className="card-text text-muted">{audio.scripture}</p>
                 <div className="d-flex align-items-center gap-3">
                   <button
-                    className="btn btn-primary"
+                    className="btn book-btn"
                     onClick={() => togglePlay(audio._id, audio.audioUrl)}
                   >
                     {playingId === audio._id ? '⏸ Pause' : '▶ Play'}
@@ -72,7 +72,7 @@ export default function AudioLibrary() {
                     href={audio.audioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-outline-secondary btn-sm"
+                    className="btn book-btn "
                   >
                     Open Link
                   </a>

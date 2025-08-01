@@ -28,7 +28,7 @@ export default function AdminTrending() {
   };
 
   return (
-    <div style={{ margin: "6rem", width: "50%" }}>
+    <div style={{width:'100vw'}} >
       <input
         type="text"
         placeholder="Book Title"

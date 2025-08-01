@@ -26,7 +26,7 @@ export default function AdminBooks() {
   };
 
   return (
-    <div style={{ margin: "6rem", width: "50%" }}>
+    <div >
       <input
         type="text"
         placeholder="Book Title"

@@ -9,6 +9,10 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;  
+  font-family: "Inter", cursive;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
 }
 
 #nav{
@@ -54,7 +58,8 @@ html, body {
     }
     /*----- --------------home.jsx------------- */
     .home-image{
-      background-image: url('./assets/Vedpathbanner.png');
+      /* background-image: url('./assets/vedpathbanner (2).png'); */
+      background-image: url('./assets//Vedpathbanner.png');
       /* background-image: url('https://vediccosmos.com/wp-content/uploads/2023/04/Bhagavad-Gita-SE-600x600.png'); */
       background-size: cover;
       background-position: center;
@@ -476,7 +481,7 @@ h5 {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.7);
-  animation: zoom 20s infinite alternate ease-in-out;
+  animation: zoom 10s infinite alternate ease-in-out;
 }
 
 .audio-content {

@@ -17,7 +17,10 @@ export default function TopSellers() {
         
 {/* Top Sellers */}
          <div className="main-content justify-content-center p-5" style={{ backgroundColor: 'cream' }}>
-  <h2 className="text-center mb-3 fw-bolder page-heading" style={{color:  theme==='dark'? 'white': '#3E2723' }}>Top Sellers</h2>
+  <h2 className="text-center mb-3 fw-bolder page-heading" style={{color:  theme==='dark'? 'white': '#3E2723', fontFamily: "'Niconne', cursive", fontSize: '56px' }}>Top Sellers</h2>
+  
+{/* <p style={{ fontFamily: "'Niconne', cursive", fontSize: '66px' }}>  Ancient texts, timeless wisdom
+</p> */}
 
   <div className="container">
     <div className="row justify-content-center g-3">

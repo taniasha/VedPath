@@ -7,6 +7,7 @@ const {addcart, userCart, deleteFromCart, deleteAllItemFromCart} = require('../c
 const {toggleWishlist, userWishlist} = require('../controllers/wishlistControllers');
 const order = require('../controllers/orderControllers');
 const { createAudio, fetchAudio } = require('../controllers/audioControllers');
+const { GetAllOrders } = require('../controllers/adminControllers');
 
 // post - data bhejna ho ..from frontend to db 
 // get - data fetch krna ho ... example display krvana ko data db se frontend mein
@@ -37,5 +38,8 @@ router.post('/add-order', order);
 //Audio
 router.post('/create-audio', createAudio);
 router.get('/fetch-audio', fetchAudio);
+
+
+
 
 module.exports = router;

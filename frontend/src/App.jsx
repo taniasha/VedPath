@@ -24,6 +24,7 @@ import Courses from './components/Courses';
 import AdminAudio from './admin/AdminAudio';
 import AudioLibrary from './components/AudioLibrary';
 import CallToAction from './components/CallToAction';
+import AdminPanel from './admin/AdminPanel';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
                   <Route path="/courses" element={<Courses/>}/>
                   <Route path="/audio" element={<AudioLibrary/>}/>
                   <Route path="/cta" element={<CallToAction/>}/>
+                  <Route path='/adminpanel' element={<AdminPanel/>}/>
                 </Routes>
               </div>
               <Footer />
