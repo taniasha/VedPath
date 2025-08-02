@@ -53,18 +53,18 @@ export default function AudioLibrary() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center text-dark mb-5">🎵 Listen to Mantras For Free</h2>
-      <div className="row justify-content-center align-items-center">
+    <div className="container mt-5 justify-content-center">
+      <h2 className="text-center text-dark mb-5 fw-bold"> <i className="bi bi-headphones fs-1x admin-icon" style={{fontSize:'40px'}}></i> Listen to Mantras For Free</h2>
+      <div className="row justify-content-center">
         {audios.map((audio) => (
-          <div className="col-md-4 col-lg-4 col-sm-12 mb-4" key={audio._id}>
-            <div className="card shadow border-primary">
+          <div className="col-md-4 col-lg-4 col-sm-6 mb-4" key={audio._id}>
+            <div className="card shadow border-primary mx-auto">
               <div className="card-body">
                 <h5 className="card-title">{audio.title}</h5>
                 <p className="card-text text-muted">{audio.scripture}</p>
-                <div className="d-flex align-items-center gap-3">
+                <div className="d-flex align-items-center gap-1 text-center">
                   <button
-                    className="btn book-btn"
+                    className="btn book-btn p-1"
                     onClick={() => togglePlay(audio._id, audio.audioUrl)}
                   >
                     {playingId === audio._id ? '⏸ Pause' : '▶ Play'}
@@ -73,7 +73,7 @@ export default function AudioLibrary() {
                     href={audio.audioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn book-btn "
+                    className="btn book-btn p-1"
                   >
                     Open Link
                   </a>

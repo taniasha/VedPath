@@ -1,118 +1,88 @@
-import React, { useContext } from 'react'
-import {Link ,  useNavigate } from 'react-router-dom';
-import '../index.css';
-import ThemeContext from '../context/ThemeContext';
-import { toast } from 'react-toastify';
-import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import ThemeContext from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
+import "./Navbar.css";
 
 export default function Navbar() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  const { user, logout, isLoggedIn } = useAuth();
+  const { clearCart } = useCart();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const { theme, setTheme} =  useContext(ThemeContext);
-  const navigate = useNavigate();
-  const { user, logout, isLoggedIn} = useAuth();
-  const {clearCart} = useCart();
-  
-  console.log("🔐 user:", user);
-  console.log("✅ isLoggedIn:", isLoggedIn);
+  const handleChange = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
-  const handleChange=()=>{
-    if(theme === "dark"){ setTheme("light")}
-    else{setTheme("dark")}
-  }
-
-  const handleLogout=()=>{
-     logout();
-     clearCart();d
+  const handleLogout = () => {
+    logout();
+    clearCart();
     toast.success("You have been logged out.");
-  }
+    setMenuOpen(false);
+  };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <>
-       <div id="nav" style={{overflow:'visible'}}>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
-                    <Link className="navbar-brand fs-2 fw-bolder" to="/">VedPath</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                       <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item mx-3 fs-5 ms-5">
-                        <Link className="nav-link active" aria-current="page" to={"/"}>Home</Link>
-                        </li>
-                        <li className="nav-item mx-3  fs-5">
-                        <Link className="nav-link" to={"/cart"}>Cart</Link>
-                        </li>
-                        <li className="nav-item mx-3 fs-5">
-                        <Link className="nav-link" to={"/books"}>Books</Link>
-                        </li>
-                        <li className="nav-item mx-3 fs-5">
-                        <Link className="nav-link" to={"/audio"}>Audio</Link>
-                        </li>
-                        <li className="nav-item mx-3 fs-5">
-                        <Link className="nav-link" to={"/courses"}>Courses</Link>
-                        </li>
-                        {isLoggedIn ? (
-                            <li className="nav-item mx-3 fs-5">
-                              <button className="nav-link btn btn-link p-1 mt-1" onClick={handleLogout}>
-                                Logout
-                              </button>
-                            </li>
-                          ) : (
-                            <li className="nav-item mx-3 fs-5">
-                              <Link className="nav-link" to="/login">Login</Link>
-                            </li>
-                          )}
+    <nav className="custom-navbar">
+      <div className="nav-container">
+        {/* Brand */}
+        <Link to="/" className="nav-brand">
+          VedPath
+        </Link>
 
-                        <li className="nav-link mx-3 fs-5 dropdown"><a className="dropdown-toggle" style={{textDecoration:'none', color:'#252525'}} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {isLoggedIn ? user.name :" My Account" }</a>
+        {/* Hamburger */}
+        <div
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-                          {isLoggedIn ? (
-                          <ul className="dropdown-menu p-2">
-                            <li>
-                              <Link className="dropdown-item nav-link" to={"/my-orders"}>My Orders</Link>
-                            </li>
-                            <li>
-                              <Link className="dropdown-item nav-link" to={"/cart"}>My Cart</Link>
-                            </li>
-                            <li>
-                              <Link className="dropdown-item nav-link" to={"/wishlist"}>My Wishlist</Link>
-                            </li>
-                            <li>
-                              <hr className="dropdown-divider" />
-                            </li>
-                            <li>
-                              <button className="dropdown-item text-danger nav-link" onClick={handleLogout}>
-                                Logout
-                              </button>
-                            </li>
-                             
-                            
-                          </ul>
-                          ) : (
-                             <ul className="dropdown-menu p-2">
-                                <li>
-                                  <Link className="dropdown-item text-danger nav-link" to="/login">
-                                    Login
-                                  </Link>
-                                </li>
-                              </ul>
-                          )}
-
-                        </li>
-
-                    </ul>
-                    <div className="nav-item mx-3 fs-5">
-                        <button className=" btn btn-outline-dark p-2 mb-2"  onClick={handleChange}>{theme==="dark"? <i className="bi bi-moon"></i> : <i className="bi bi-moon-fill"></i>}</button>
-                      </div>
-
-                    
-                    </div>
-                </div>
-           </nav>
-       </div>
-      
-    </>
-  )
+        {/* Links */}
+        <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <li>
+            <Link to="/" onClick={closeMenu}>Home</Link>
+          </li>
+          <li>
+            <Link to="/cart" onClick={closeMenu}>Cart</Link>
+          </li>
+          <li>
+            <Link to="/books" onClick={closeMenu}>Books</Link>
+          </li>
+          <li>
+            <Link to="/audio" onClick={closeMenu}>Audio</Link>
+          </li>
+          <li>
+            <Link to="/courses" onClick={closeMenu}>Courses</Link>
+          </li>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <button className="logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+              <li>
+                <span className="username">{user.name}</span>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login" onClick={closeMenu}>Login</Link>
+            </li>
+          )}
+          <li>
+            <button className="theme-btn" onClick={handleChange}>
+              {theme === "dark" ? "🌙" : "☀️"}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
 }

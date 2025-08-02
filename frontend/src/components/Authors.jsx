@@ -13,7 +13,7 @@ export default function Authors() {
     
   return (
     <>
-        <div id="authors-section" className='pb-5 my-5 pt-5 justify-content-center text-center'>
+        <div id="authors-section" className='pb-5 mt-5 mb-3 pt-5 justify-content-center text-center'>
           <h2 className='text-center mb-4 fw-bold page-heading' style={{color: theme==='dark'? 'white':'#3E2723', fontFamily: "'Niconne', cursive", fontSize: '56px'}}>Top Authors</h2>
             <div className="row justify-content-center g-2">
                 {products.map((product, index)=>(

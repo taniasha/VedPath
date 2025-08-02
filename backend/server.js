@@ -16,11 +16,29 @@ const audioRoutes = require('../backend/routes/routes');
 const adminRoutes = require('../backend/routes/admin');
 
 // Middleware
+// app.use(cors({
+//   origin: "https://vedpath.netlify.app", // your Netlify frontend URL
+//   credentials: true
+// }));
+// app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:5173",           // vite local
+  "https://vedpath.netlify.app"      // live site
+];
+
 app.use(cors({
-  origin: "https://vedpath.netlify.app", // your Netlify frontend URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
-app.use(express.json());
+
+
 
 
 // Routes
