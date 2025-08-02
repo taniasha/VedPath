@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export default function AdminAudio() {
   const [form, setForm] = useState({
@@ -18,7 +20,7 @@ export default function AdminAudio() {
   const handleAudio = async () => {
     console.log("hey")
     try {
-      const response = await axios.post('http://localhost:5000/admin/create-audio', form, {
+      const response = await axios.post(`${API_URL}/admin/create-audio`, form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }

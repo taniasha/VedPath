@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import {toast} from 'react-toastify';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminBooks() {
   const [form, setForm] = useState({
@@ -14,7 +15,7 @@ export default function AdminBooks() {
   };
 
   const handleBooks = () => {
-    axios.post('http://localhost:5000/admin/addbooks', form ,{
+    axios.post(`${API_URL}/admin/addbooks`, form ,{
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }

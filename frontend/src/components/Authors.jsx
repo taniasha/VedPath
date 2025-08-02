@@ -23,15 +23,11 @@ export default function Authors() {
                         </div>
                         <div className="card-footer text-center">
                              <div className="title" style={{fontFamily: "'Niconne', cursive", fontSize: '22px'}}>{product.title}</div>
-                        </div>
-                        
+                        </div> 
                      </div>
-                ))}
-                
-                 
+                ))}     
             </div>
         </div>
-      
     </>
   )
 }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Books() {
    const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Books() {
         const userId = user?._id;
 
         // 1. fetch books
-       axios.get('http://localhost:5000/book/getbooks')
+       axios.get(`${API_URL}/book/getbooks`)
       .then((response)=>{
           console.log(response.data);
           setBooks(response.data)})
@@ -31,7 +32,7 @@ export default function Books() {
 
       //2. fetch wishlist --- so that the heart icon remain red for books which r stored in db
       if(userId){
-         axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`, {
+         axios.get(`${API_URL}/wishlist/userwishlist/${userId}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
             }

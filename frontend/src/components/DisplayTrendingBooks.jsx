@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+const API_URL = import.meta.env.VITE_API_URL;
 
 // we are passing id and onClose as props:
 export default function DisplayTrendingBooks({id, onClose}) {
@@ -15,7 +16,7 @@ export default function DisplayTrendingBooks({id, onClose}) {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/trending/trending/${id}`)
+    axios.get(`${API_URL}/trending/trending/${id}`)
       .then((response) => {
         setTrending(response.data);
       })

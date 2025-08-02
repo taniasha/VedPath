@@ -5,6 +5,7 @@ import "../index.css";
 import { Link, useNavigate } from "react-router-dom";
 import DisplayTrendingBooks from "./DisplayTrendingBooks";
 import ThemeContext from "../context/ThemeContext";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Trending() {
   const {theme} = useContext(ThemeContext);
@@ -15,7 +16,7 @@ export default function Trending() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/trending/showtrending")
+      .get(`${API_URL}/trending/showtrending`)
       .then((response) => {
         setTrending(response.data);
       })

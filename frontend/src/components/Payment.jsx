@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Payments = ({ amount }) => {
   const { cartItems, clearCart } = useCart();
@@ -41,7 +42,7 @@ const Payments = ({ amount }) => {
 
         // 🔄 Save order in MongoDB via backend
         try {
-          const res = await axios.post("http://localhost:5000/order/add-order", {
+          const res = await axios.post(`${API_URL}/order/add-order`, {
             userId,
             name,
             // orderId: razorpay_payment_id,
@@ -50,7 +51,10 @@ const Payments = ({ amount }) => {
                 productId: item._id,
                 title: item.title,
                 quantity: item.quantity,
-            })),
+            }))} ,{
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
           });
 
           console.log("✅ Order saved to DB:", res.data);

@@ -4,6 +4,7 @@ import React,{createContext, useEffect, useState} from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "./AuthContext";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CartContext = createContext(); //create a global cart context
 export const useCart =()=> useContext(CartContext);
@@ -22,7 +23,7 @@ export const CartProvider = ({children})=>{
         }
 
         try{
-            await axios.post("http://localhost:5000/cart/addtocart",{
+            await axios.post(`${API_URL}/cart/addtocart`,{
                 userId: userId,
                 productId: product._id,
                 image: product.image,
@@ -49,7 +50,7 @@ export const CartProvider = ({children})=>{
         }
 
         try {
-            const res = await axios.get(`http://localhost:5000/cart/usercart/${userId}`, {
+            const res = await axios.get(`${API_URL}/cart/usercart/${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
@@ -64,7 +65,7 @@ export const CartProvider = ({children})=>{
     //remove from cart
     const removeFromCart=async(productId)=>{
       try{
-           await axios.delete(`http://localhost:5000/cart/delete/${productId}`, {
+           await axios.delete(`${API_URL}/cart/delete/${productId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
@@ -80,7 +81,7 @@ export const CartProvider = ({children})=>{
     const clearCart=()=>{
       try{
         // 1. clear backend cart
-        axios.delete(`http://localhost:5000/cart/delete-cart-items/${userId}`,{
+        axios.delete(`${API_URL}/cart/delete-cart-items/${userId}`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }

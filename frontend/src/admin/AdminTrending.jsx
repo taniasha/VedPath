@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminTrending() {
   const [form, setForm] = useState({
@@ -16,7 +17,7 @@ export default function AdminTrending() {
   };
 
   const handleTrending = () => {
-    axios.post('http://localhost:5000/admin/addtrending', form,{ 
+    axios.post(`${API_URL}/admin/addtrending`, form,{ 
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }

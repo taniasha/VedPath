@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AudioLibrary() {
   const [audios, setAudios] = useState([]);
@@ -10,8 +11,7 @@ export default function AudioLibrary() {
   useEffect(() => {
     const fetchAudios = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/audio/fetch-audio')
-
+        const res = await axios.get(`${API_URL}/audio/fetch-audio`)
         setAudios(res.data.audio);
       } catch (e) {
         console.error("Error fetching audios", e);

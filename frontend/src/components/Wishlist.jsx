@@ -6,6 +6,7 @@ import {useAuth} from '../context/AuthContext'
 import ThemeContext from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Wishlist() {
 
@@ -19,7 +20,7 @@ export default function Wishlist() {
 
 
     const handleWishlist=async()=>{
-      const response = await axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`, {
+      const response = await axios.get(`${API_URL}/wishlist/userwishlist/${userId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }

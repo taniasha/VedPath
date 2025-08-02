@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminOrders() {
   const [datas, setData] = useState([]);
@@ -11,7 +12,7 @@ export default function AdminOrders() {
   const handleAllOrder = () => {
     console.log("helo")
     axios
-      .get('http://localhost:5000/admin/order-data', {
+      .get(`${API_URL}/admin/order-data`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }

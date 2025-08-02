@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Login() {
 
 
    const handleLoginUser=()=>{
-    axios.post('http://localhost:5000/auth/login',{
+    axios.post(`${API_URL}/auth/login`,{
        email: form.email,
        password:form.password
     })

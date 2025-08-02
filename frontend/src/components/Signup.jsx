@@ -3,6 +3,7 @@ import '../index.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function Signup() {
 console.log(form)
   
   const handleSignupUser=()=>{
-     axios.post("http://localhost:5000/auth/signup",{
+     axios.post(`${API_URL}/auth/signup`,{
       name: form.name,
       email: form.email,
       password: form.password
