@@ -19,7 +19,11 @@ export default function Wishlist() {
 
 
     const handleWishlist=async()=>{
-      const response = await axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`)
+      const response = await axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        });
         setBooks(response.data.data);
         console.log(response.data);
     }

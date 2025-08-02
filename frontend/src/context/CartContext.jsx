@@ -28,7 +28,11 @@ export const CartProvider = ({children})=>{
                 image: product.image,
                 price: product.price,
                 title: product.title,
-            });
+            },{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+                });
             toast.success("Item added to Cart")
             console.log("item added to cart", cartItems)
             fetchCart();
@@ -45,7 +49,11 @@ export const CartProvider = ({children})=>{
         }
 
         try {
-            const res = await axios.get(`http://localhost:5000/cart/usercart/${userId}`);
+            const res = await axios.get(`http://localhost:5000/cart/usercart/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+            });;
             setCartItems(res.data);
         } catch (err) {
             console.error("Error fetching cart:", err.message);
@@ -56,7 +64,11 @@ export const CartProvider = ({children})=>{
     //remove from cart
     const removeFromCart=async(productId)=>{
       try{
-           await axios.delete(`http://localhost:5000/cart/delete/${productId}`)
+           await axios.delete(`http://localhost:5000/cart/delete/${productId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+            });
             toast.info("Item removed from cart");
            fetchCart();
       }catch(e){
@@ -68,8 +80,12 @@ export const CartProvider = ({children})=>{
     const clearCart=()=>{
       try{
         // 1. clear backend cart
-        axios.delete(`http://localhost:5000/cart/delete-cart-items/${userId}`)
-      
+        axios.delete(`http://localhost:5000/cart/delete-cart-items/${userId}`,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+                
         // 2. clear frontend cart
         setCartItems([]);
         localStorage.removeItem('cartItems');

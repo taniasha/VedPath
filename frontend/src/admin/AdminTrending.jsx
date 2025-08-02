@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function AdminTrending() {
   const [form, setForm] = useState({
@@ -15,12 +16,21 @@ export default function AdminTrending() {
   };
 
   const handleTrending = () => {
-    axios.post('http://localhost:5000/trending/addtrending', form)
+    axios.post('http://localhost:5000/admin/addtrending', form,{ 
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+
+    })
       .then((res) => {
         console.log('✅ Book Added:', res.data);
+        toast.success("Add trending Book Successfully")
         setForm({ title: '', image: '', price: '', author:'',rating:'' });
       })
-      .catch((err) => console.error('❌ Error:', err));
+      .catch((err) => {
+        console.error('❌ Error:', err);
+        toast.error("Failed to add Book")
+      });
   };
 
   const handleSubmit = () => {
@@ -28,7 +38,9 @@ export default function AdminTrending() {
   };
 
   return (
-    <div style={{width:'100vw'}} >
+    <div >
+     <h4 className="mb-3 fw-bold"><i class="bi bi-fire admin-icon fs-3"></i> Add a New Trending Book</h4>
+
       <input
         type="text"
         placeholder="Book Title"
@@ -64,7 +76,7 @@ export default function AdminTrending() {
         value={form.rating}
         onChange={handleChange}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button  className=' btn book-btn' onClick={handleSubmit}>Submit</button>
     </div>
   );
 }

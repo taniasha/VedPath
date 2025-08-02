@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import {toast} from 'react-toastify';
 
 export default function AdminBooks() {
   const [form, setForm] = useState({
@@ -13,12 +14,20 @@ export default function AdminBooks() {
   };
 
   const handleBooks = () => {
-    axios.post('http://localhost:5000/book/addbooks', form)
+    axios.post('http://localhost:5000/admin/addbooks', form ,{
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
       .then((res) => {
         console.log('✅ Book Added:', res.data);
+        toast.success("Book Added Successfully")
         setForm({ title: '', image: '', price: '' });
       })
-      .catch((err) => console.error('❌ Error:', err));
+      .catch((err) => {
+        console.error('❌ Error:', err);
+        toast.error("Failed to add Book")
+      });
   };
 
   const handleSubmit = () => {
@@ -27,6 +36,8 @@ export default function AdminBooks() {
 
   return (
     <div >
+      <h4 className="mb-3 fw-bold"><i class="bi bi-book-fill admin-icon fs-3"></i> Add a New Book</h4>
+
       <input
         type="text"
         placeholder="Book Title"
@@ -48,7 +59,7 @@ export default function AdminBooks() {
         value={form.price}
         onChange={handleChange}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button className='btn book-btn' onClick={handleSubmit}>Submit</button>
     </div>
   );
 }

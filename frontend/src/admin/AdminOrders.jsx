@@ -11,7 +11,11 @@ export default function AdminOrders() {
   const handleAllOrder = () => {
     console.log("helo")
     axios
-      .get('http://localhost:5000/admin/order-data')
+      .get('http://localhost:5000/admin/order-data', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
       .then((response) => {
         console.log("DATa:",response.data)
         setData(response.data.orderData);
@@ -23,6 +27,7 @@ export default function AdminOrders() {
   return (
     <div className="container">
       {/* <h3 className="mb-3">Orders Tracking</h3> */}
+           <h4 className="mb-3 fw-bold"><i class="bi bi-box-fill admin-icon fs-2"></i> All Orders</h4>
 
       <div className="table-responsive" >
         <table className="table table-bordered table-striped align-middle">
@@ -45,7 +50,7 @@ export default function AdminOrders() {
                 <tr key={data._id}>
                   <td>{index+1}</td>
                   <td>{data.userId}</td>
-                  <td>{data._id}</td>
+                  <td>{data.orderId}</td>
                   <td>₹{data.totalAmount}</td>
                   <td>
                     <ul className="mb-0 ps-3">

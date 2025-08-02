@@ -10,7 +10,8 @@ export default function AudioLibrary() {
   useEffect(() => {
     const fetchAudios = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/audio/fetch-audio');
+        const res = await axios.get('http://localhost:5000/audio/fetch-audio')
+
         setAudios(res.data.audio);
       } catch (e) {
         console.error("Error fetching audios", e);
@@ -53,7 +54,7 @@ export default function AudioLibrary() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center text-dark mb-5">🎵 Listen to Mantras</h2>
+      <h2 className="text-center text-dark mb-5">🎵 Listen to Mantras For Free</h2>
       <div className="row justify-content-center align-items-center">
         {audios.map((audio) => (
           <div className="col-md-4 col-lg-4 col-sm-12 mb-4" key={audio._id}>

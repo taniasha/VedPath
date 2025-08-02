@@ -20,11 +20,6 @@ export default function AudioPromo() {
       </div>
     </div>
 
-
-{/* <section>
-    <img src={img} alt="" width="80%"/>
-</section>
-     */}
         </>
         
   );

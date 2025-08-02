@@ -25,16 +25,24 @@ export default function Login() {
        password:form.password
     })
     .then((response)=> {
+      const { user, token } = response.data;
       console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", response.data.token);
-      login(response.data);  // using AuthContext()
-      setForm({email:'', password:''});
-      toast.success("Login successfull!")
-      
-      setTimeout(() => {
-        navigate("/") 
-      }, 1000);
+
+        if(user.email === 'vedpath@gmail.com'){
+          toast.success("Welcome Admin")
+          login(response.data);
+          navigate('/adminpanel');
+        }else{
+          login(response.data);  // using AuthContext()
+          setForm({email:'', password:''});
+          toast.success("Login successfull!")
+
+          setTimeout(() => {
+            navigate("/") 
+          }, 1000);
+        }
     })
     .catch((e) => {
       toast.error("Login Failed")
@@ -45,7 +53,6 @@ export default function Login() {
       }
     });
    }
-
 
 
    const handleSubmit=(e)=>{

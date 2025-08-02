@@ -4,30 +4,29 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
+import {ThemeProvider}  from './context/ThemeContext';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Books from './components/Books';
-import {ThemeProvider}  from './context/ThemeContext';
-import AdminBooks from './admin/AdminBooks';
 import DisplayBooks from './components/DisplayBooks';
-import Test from './components/Test'
-import AdminTrending from './admin/AdminTrending';
 import Home from './components/Home';
-import Footer from './components/footer';
+import Footer from './components/Footer';
+// import Navbar from './components/Navbar';
 import DisplayTrendingBooks from './components/DisplayTrendingBooks';
-import { CartProvider } from './context/CartContext';
 import Cart  from './components/Cart';
-import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Wishlist from './components/Wishlist';
 import Courses from './components/Courses';
-import AdminAudio from './admin/AdminAudio';
-import AudioLibrary from './components/AudioLibrary';
 import CallToAction from './components/CallToAction';
 import AdminPanel from './admin/AdminPanel';
+import AudioLibrary from './components/AudioLibrary';
 
 function App() {
 
+const user = JSON.parse(localStorage.getItem("user"));
+   
    useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -41,36 +40,33 @@ function App() {
   return (
    <>                      
     {/* we r wrapping our all routes will themecontext.provider and data(value) so that it will be accessible globally */}
+            <BrowserRouter>
     <ThemeProvider>
       <AuthProvider>
         <CartProvider>
-            <BrowserRouter>
-              <Navbar />
+           {!user || user?.email !== 'vedpath@gmail.com' ? <Navbar /> : null}
+
               <div className="content-wrapper">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/books" element={<Books />} />
-                  <Route path="/admin" element={<AdminBooks />} />
-                  <Route path="/admintrending" element={<AdminTrending />} />
-                  <Route path="/adminaudio" element={<AdminAudio/>} />
-
                   <Route path="/book/:id" element={<DisplayBooks />} />
                   <Route path="/trending/:id" element={<DisplayTrendingBooks />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/wishlist" element={<Wishlist />} />
                   <Route path="/courses" element={<Courses/>}/>
-                  <Route path="/audio" element={<AudioLibrary/>}/>
                   <Route path="/cta" element={<CallToAction/>}/>
+                  <Route path="/audio" element={<AudioLibrary/>}/>
                   <Route path='/adminpanel' element={<AdminPanel/>}/>
                 </Routes>
               </div>
               <Footer />
-            </BrowserRouter>
         </CartProvider>
       </AuthProvider>
     </ThemeProvider>
+            </BrowserRouter>
    </>
   )
 }

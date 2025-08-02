@@ -41,7 +41,7 @@ const login = async (req, res) => {
     if (!matchPass) return res.status(401).json({ msg: "Incorrect Password" });
 
     //Generate Token JWT
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({ token, user: { _id: user._id, email: user.email, name: user.name } });
   } catch (e) {

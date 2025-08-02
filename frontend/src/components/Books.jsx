@@ -22,11 +22,7 @@ export default function Books() {
         const userId = user?._id;
 
         // 1. fetch books
-       axios.get('http://localhost:5000/book/getbooks',{
-        headers: {
-           Authorization : `Bearer ${token}` //send token in header
-        }
-       })
+       axios.get('http://localhost:5000/book/getbooks')
       .then((response)=>{
           console.log(response.data);
           setBooks(response.data)})
@@ -35,7 +31,11 @@ export default function Books() {
 
       //2. fetch wishlist --- so that the heart icon remain red for books which r stored in db
       if(userId){
-         axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`)
+         axios.get(`http://localhost:5000/wishlist/userwishlist/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          })
          .then((response)=>{
              const productIds = response.data.data.map((item)=>item.productId)
              setWishlistIds(productIds);
@@ -86,6 +86,10 @@ export default function Books() {
       image: book.image,
       price: book.price,
       userId,
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
 
     if (res.data.msg.includes("Added to wishlist")) {

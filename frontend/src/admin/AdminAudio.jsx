@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function AdminAudio() {
   const [form, setForm] = useState({
@@ -15,13 +16,19 @@ export default function AdminAudio() {
 
   // Fix 2: Include form data in POST request
   const handleAudio = async () => {
+    console.log("hey")
     try {
-      const response = await axios.post('http://localhost:5000/audio/create-audio', form);
-      console.log("Audio added:", response.data);
-      alert("Audio added successfully!");
+      const response = await axios.post('http://localhost:5000/admin/create-audio', form, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        })
+          console.log("Audio added:", response.data);
+          toast.success("Audio added successfully!");
     } catch (e) {
-      console.error("Error adding audio:", e.message);
-    }
+          console.error("Error adding audio:", e.message);
+          toast.error("Failed to add Audio")
+   }
   };
 
   // Fix 3: Add `e` in handleSubmit to prevent form reload
@@ -34,6 +41,8 @@ export default function AdminAudio() {
     <>
       <form onSubmit={handleSubmit}>
         <div className='admin-audio'>
+           <h4 className="mb-3 fw-bold"><i class="bi bi-headphones admin-icon fs-1"></i> Add a New Audio</h4>
+
           <input
             type="text"
             name="title"
@@ -55,7 +64,7 @@ export default function AdminAudio() {
             value={form.audioUrl}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button className='btn book-btn' type="submit">Submit</button>
         </div>
       </form>
     </>
