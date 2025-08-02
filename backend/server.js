@@ -16,7 +16,10 @@ const audioRoutes = require('../backend/routes/routes');
 const adminRoutes = require('../backend/routes/admin');
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://vedpath.netlify.app", // your Netlify frontend URL
+  credentials: true
+}));
 app.use(express.json());
 
 
