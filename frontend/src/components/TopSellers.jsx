@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ThemeContext from "../context/ThemeContext";
 import { useContext } from "react";
+
 export default function TopSellers() {
   const books = [
     {
@@ -28,80 +29,83 @@ export default function TopSellers() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <>
-      {/* Top Sellers */}
-      <div  className="main-content justify-content-center" style={{ backgroundColor: "cream" }} >
-        <h2
-          className="text-center mb-3 fw-bolder page-heading"
-          style={{
-            color: theme === "dark" ? "white" : "#3E2723",
-            fontFamily: "'Niconne', cursive",
-            fontSize: "56px",
-          }}
-        >
-          Top Sellers
-        </h2>
+    <div
+      className="main-content justify-content-center"
+      style={{ backgroundColor: "cream" }}
+    >
+      <h2
+        className="text-center mb-3 fw-bolder page-heading"
+        style={{
+          color: theme === "dark" ? "white" : "#3E2723",
+          fontFamily: "'Niconne', cursive",
+          fontSize: "56px",
+        }}
+      >
+        Top Sellers
+      </h2>
 
-        {/* <p style={{ fontFamily: "'Niconne', cursive", fontSize: '66px' }}>  Ancient texts, timeless wisdom
-</p> */}
-
-        <div className="seller-section">
-          <div className="row justify-content-center g-3">
-            {books.map((book) => (
-              <div className="col-md-6 col-sm-6 col-lg-3 col-xs-12" key={book.id}>
-                <Link
-                  to="/books"
-                  style={{ textDecoration: "none", color: "black" }}
+      <div className="seller-section">
+        <div className="row justify-content-center g-3">
+          {books.map((book, index) => (
+            <div
+              className="col-md-6 col-sm-6 col-lg-3 col-xs-12"
+              key={book.id}
+              data-aos="fade-up"
+              data-aos-delay={index * 150} // stagger animation
+              data-aos-duration="800"
+              data-aos-once="false"
+              data-aos-offset="100"
+            >
+              <Link
+                to="/books"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <div
+                  className="card seller-card"
+                  style={{
+                    borderRadius: "1rem",
+                    overflow: "hidden",
+                    margin: "0 auto",
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.5)",
+                  }}
                 >
                   <div
-                    className="card"
-                    data-aos="zoom-in"
-                    data-aos-duration="1000"
+                    className="card-body"
                     style={{
-                      borderRadius: "1rem",
-                      overflow: "hidden",
-                      margin: "0 auto",
-                      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                      padding: 0,
+                      height: "12rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#e9d2b4ff",
                     }}
                   >
-                    <div
-                      className="card-body"
+                    <img
+                      src={book.img}
+                      alt={book.title}
                       style={{
-                        padding: 0,
-                        height: "12rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: "#fdf8f1", // optional
+                        maxHeight: "100%",
+                        maxWidth: "100%",
+                        objectFit: "contain",
                       }}
-                    >
-                      <img
-                        src={book.img}
-                        alt={book.title}
-                        style={{
-                          maxHeight: "100%",
-                          maxWidth: "100%",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="card-footer text-center"
-                      style={{
-                        fontStyle: "italic",
-                        padding: "0.5rem",
-                        backgroundColor: "transparent",
-                      }}
-                    >
-                      {book.title}
-                    </div>
+                    />
                   </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+                  <div
+                    className="card-footer text-center"
+                    style={{
+                      fontStyle: "italic",
+                      padding: "0.5rem",
+                      backgroundColor: "transparent",
+                    }}
+                  >
+                    {book.title}
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

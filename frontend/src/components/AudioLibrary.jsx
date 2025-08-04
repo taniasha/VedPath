@@ -53,9 +53,9 @@ export default function AudioLibrary() {
   };
 
   return (
-    <div className="container mt-5 justify-content-center">
-      <h2 className="text-center text-dark mb-5 fw-bold"> <i className="bi bi-headphones fs-1x admin-icon" style={{fontSize:'40px'}}></i> Listen to Mantras For Free</h2>
-      <div className="row justify-content-center">
+    <div className="container mt-5 mb-4 justify-content-center" style={{backgroundColor:'#f1e1caff', borderRadius:'4%'}}>
+      <h2 className="text-center text-dark mb-5 fw-bold pt-3"> <i className="bi bi-headphones fs-1x admin-icon" style={{fontSize:'40px'}}></i> Listen to Mantras For Free</h2>
+      <div className="row justify-content-center pb-4">
         {audios.map((audio) => (
           <div className="col-md-4 col-lg-4 col-sm-6 mb-4" key={audio._id}>
             <div className="card shadow border-primary mx-auto">

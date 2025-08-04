@@ -29,10 +29,17 @@ const user = JSON.parse(localStorage.getItem("user"));
    
    useEffect(() => {
     AOS.init({
-      duration: 1000,
-      once: true,
+      duration: 2000,
+      once: false,
+      mirror:true,
     });
   }, []);
+
+   const onScroll = () => {
+    AOS.refresh(); // re-check element positions
+  };
+
+
 
   //  const [theme,setTheme] = useState('dark'); //globally manage krna hai taki sabhi componenet k pas ye jaye
   //  const [auth, setAuth] = useState(true);
