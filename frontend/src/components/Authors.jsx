@@ -13,7 +13,7 @@ export default function Authors() {
     
   return (
     <>
-        <div id="authors-section" className='pb-5 mt-5  pt-5 justify-content-center text-center'>
+        <div id="authors-section" className='pb-5 mt-5  pt-5 mb-3 justify-content-center text-center'>
           <h2 className='text-center mb-4 fw-bold page-heading' style={{color: theme==='dark'? 'white':'#3E2723', fontFamily: "'Niconne', cursive", fontSize: '56px'}}>Top Authors</h2>
             <div className="row justify-content-center g-2">
                 {products.map((product, index)=>(
@@ -21,14 +21,15 @@ export default function Authors() {
               className="col-lg-3 col-md-4 col-sm-6"
               key={index}
               data-aos="fade-up"
-              data-aos-delay={index * 150} // stagger animation
-              data-aos-duration="800"
+              data-aos-delay={index * 150} 
+              data-aos-duration="2000"
               data-aos-once="false"
-              data-aos-offset="100"
+              data-aos-offset="0"
+              data-aos-anchor-placement="top-bottom"
             >
                       <div className="card mx-auto" key={index}
                         >
-                        <div className="card-body text-center" style={{height: "16rem"}}>
+                        <div className="card-body text-center" style={{height: "15rem"}}>
                              <img src={product.img} alt="" />
                         </div>
                         <div className="card-footer text-center">

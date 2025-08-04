@@ -43,7 +43,7 @@ export default function DisplayTrendingBooks({id, onClose}) {
       </div>
 
       <div className="trending-right">
-        <h2 className="book-title">{trending.title}</h2>
+        <h3 className="book-title">{trending.title}</h3>
         <h5 className="book-author">By: {trending.author}</h5>
         <p className="fw-bold book-price">Rs. {trending.price}</p>
         <button className="cart-button" onClick={handleCart}>Add to Cart</button>
