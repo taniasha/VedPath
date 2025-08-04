@@ -21,8 +21,8 @@ export default function Authors() {
               className="col-lg-3 col-md-4 col-sm-6"
               key={index}
               data-aos="fade-up"
-              data-aos-delay={index * 150} 
-              data-aos-duration="2000"
+              data-aos-delay={index * 400} 
+              data-aos-duration="1000"
               data-aos-once="false"
               data-aos-offset="0"
               data-aos-anchor-placement="top-bottom"
