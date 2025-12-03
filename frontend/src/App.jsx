@@ -22,6 +22,7 @@ import Courses from './components/Courses';
 import CallToAction from './components/CallToAction';
 import AdminPanel from './admin/AdminPanel';
 import AudioLibrary from './components/AudioLibrary';
+import OrderHistory  from './components/OrderHistory';
 
 function App() {
 
@@ -67,6 +68,7 @@ const user = JSON.parse(localStorage.getItem("user"));
                   <Route path="/cta" element={<CallToAction/>}/>
                   <Route path="/audio" element={<AudioLibrary/>}/>
                   <Route path='/adminpanel' element={<AdminPanel/>}/>
+                  <Route path="/order-history" element={<OrderHistory/>}/>
                 </Routes>
               </div>
               <Footer />

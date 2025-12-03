@@ -10,7 +10,6 @@ const signup = async (req, res) => {
      if (!name || !email || !password) {
       return res.status(400).json({ msg: 'All fields are required' });
     }
-
     const existingUser = await User.findOne({email}); //user schema mein hum find kr rhe h
     if (existingUser)
       return res.status(400).json({ msg: "User already exists" });
@@ -20,12 +19,13 @@ const signup = async (req, res) => {
     const user = await User.create({ name, email, password: hashedPassword });
     // await user.save();
 
-    const token = jwt.sign({userId:user._id}, JWT_SECRET, {expiresIn:'24h'})
+    const token = jwt.sign({id : user._id}, JWT_SECRET, {expiresIn:'24h'})
 
     res.status(201).json({ msg: "user created successfully", user, token });
-  } catch (e) {
-    console.log("Internal server error", e.message);
-  }
+ } catch (e) {
+  console.log("Internal server error", e.message);
+  return res.status(500).json({ msg: "Internal server error", error: e.message });
+}
 };
 
 

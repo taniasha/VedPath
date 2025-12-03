@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Payments = ({ amount }) => {
@@ -25,8 +26,13 @@ const Payments = ({ amount }) => {
     }
 
     const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user?._id || user?.id;
-    const name = user?.name || user?.email;
+    const token = localStorage.getItem("token");
+    const userId = user?._id;
+
+    if (!userId || !token) {
+      toast.error("You need to be logged in to make a payment.");
+      return;
+    }
 
     const options = {
       key: "rzp_test_1DP5mmOlF5G5ag", // Replace with your Razorpay Test Key
@@ -35,42 +41,46 @@ const Payments = ({ amount }) => {
       name: "VedPath",
       description: "Cart Payment",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXf0pu3oq1WictEC1Jg0xellFM1t3HyzX1rQ&s",
-
       handler: async function (response) {
-      
-        toast.success("✅ Payment Successful!\nPayment ID: " + response.razorpay_payment_id)
+        toast.success("✅ Payment Successful! Payment ID: " + response.razorpay_payment_id);
 
-        // 🔄 Save order in MongoDB via backend
+        // Save order to backend
         try {
-          const res = await axios.post(`${API_URL}/order/add-order`, {
-            userId,
-            name,
-            // orderId: razorpay_payment_id,
-            totalAmount: amount,
-            items: cartItems.map((item) => ({
+          const res = await axios.post(
+            `${API_URL}/order/add-order`,
+            {
+              userId,
+              name: user.name,
+              totalAmount: amount,
+              paymentId: response.razorpay_payment_id, // store payment id
+              paymentStatus: "paid", // mark as paid
+              items: cartItems.map((item) => ({
                 productId: item._id,
                 title: item.title,
                 quantity: item.quantity,
-            }))} ,{
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`
+              })),
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json" 
+              },
             }
-          });
+          );
 
           console.log("✅ Order saved to DB:", res.data);
-          clearCart(); // Optionally clear cart
+          clearCart();
         } catch (error) {
           console.error("❌ Failed to save order:", error.message);
+          toast.error("Failed to save your order. Contact support.");
         }
       },
       prefill: {
-        name: name,
-        email: user?.email || "",
+        name: user.name,
+        email: user.email,
         contact: "9000000000",
       },
-      theme: {
-        color: "#462e28ff",
-      },
+      theme: { color: "#462e28ff" },
     };
 
     const rzp = new window.Razorpay(options);

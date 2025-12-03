@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
-
-
 // Import routes
 const authRoutes = require('./routes/auth');
 const bookRoutes = require('./routes/routes');
@@ -11,7 +9,7 @@ const trendingRoutes = require('../backend/routes/routes');
 const cartRoutes = require('../backend/routes/routes');
 const wishlistRoute = require('../backend/routes/routes');
 const connectMongo = require('./db');
-const orderRoute = require('../backend/routes/routes');
+const orderRoute = require('./routes/orderRouter');
 const audioRoutes = require('../backend/routes/routes');
 const adminRoutes = require('../backend/routes/admin');
 
@@ -39,6 +37,8 @@ app.use(cors({
 }));
 
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // Routes

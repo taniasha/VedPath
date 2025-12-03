@@ -11,6 +11,8 @@ export default function Navbar() {
   const { user, logout, isLoggedIn } = useAuth();
   const { clearCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+
 
   const handleChange = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -62,6 +64,23 @@ export default function Navbar() {
           </li>
           {isLoggedIn ? (
             <>
+             {/* My Account Dropdown */}
+              <li 
+                  className="dropdown" 
+                  onClick={() => setMenuOpen(false)} // so mobile closes properly
+                  onMouseEnter={() => setDropdown(true)}
+                  onMouseLeave={() => setDropdown(false)}
+                >
+                  <span className="dropdown-title">My Account ▾</span>
+
+                  {dropdown && (
+                    <div className="dropdown-menu">
+                      <Link to="/order-history" onClick={closeMenu}>My Orders</Link>
+                      <Link to="/wishlist" onClick={closeMenu}>Wishlist</Link>
+                    </div>
+                  )}
+                </li>
+
               <li>
                 <button className="logout-btn" onClick={handleLogout}>
                   Logout

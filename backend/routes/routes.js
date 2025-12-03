@@ -5,8 +5,9 @@ const {showtrending, displaytrending} = require('../controllers/trendingControll
 const verifyToken = require('../middleware/verifyToken');
 const {addcart, userCart, deleteFromCart, deleteAllItemFromCart} = require('../controllers/cartControllers');
 const {toggleWishlist, userWishlist} = require('../controllers/wishlistControllers');
-const order = require('../controllers/orderControllers');
+// const {order, verifyPayment} = require('../controllers/orderControllers');
 const {  fetchAudio } = require('../controllers/audioControllers');
+// const { getOrderHistory } = require('../controllers/historyController');
 
 
 // post - data bhejna ho ..from frontend to db 
@@ -31,12 +32,15 @@ router.post('/togglewishlist',verifyToken, toggleWishlist);
 router.get('/userwishlist/:userId',verifyToken, userWishlist);
 
 //Order
-router.post('/add-order',verifyToken, order);
+// router.post('/add-order',verifyToken, order);
 
 //Audio
 router.get('/fetch-audio', fetchAudio);
 
 
+// router.post("/verify-payment", verifyToken, verifyPayment);
+
+// router.get('/my-orders', verifyToken, getOrderHistory);
 
 
 module.exports = router;
