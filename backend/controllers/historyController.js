@@ -2,7 +2,7 @@ const { Order } = require("../models/orderModels");
 
 const getOrderHistory = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     const orders = await Order.find({
       userId,
