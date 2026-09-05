@@ -72,6 +72,15 @@ export default function Navbar() {
                 )}
               </li>
 
+              {user?.email === 'vedpath@gmail.com' && (
+                <li>
+                  <Link to="/adminpanel" className="badge px-3 py-2 text-dark fw-bold font-cinzel"
+                    style={{ background: 'linear-gradient(135deg, #d4af37, #f0c84a)', borderRadius: '20px', textDecoration: 'none', letterSpacing: '0.5px' }}>
+                    <i className="bi bi-shield-lock-fill me-1" /> ADMIN
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <span className="font-cinzel fw-semibold" style={{ color: '#d4af37', fontSize: '0.875rem' }}>
                   {user.name}

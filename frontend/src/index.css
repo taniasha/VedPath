@@ -383,3 +383,52 @@ a, a:hover, a:focus, a:visited {
   background: #d4af37;
   transition: all 0.3s ease;
 }
+
+/* ─── Admin Dashboard Styles ─── */
+.admin-sidebar {
+  background: #120d08;
+  border-right: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 1.5rem 1rem;
+}
+.admin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #9e8a6e;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  transition: all 0.25s ease;
+  margin-bottom: 6px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+.admin-tab-btn i {
+  font-size: 1.2rem;
+  color: #d4af37;
+  transition: transform 0.2s ease;
+}
+.admin-tab-btn:hover {
+  background: rgba(212, 175, 55, 0.08);
+  color: #f5e6c8 !important;
+  border-color: rgba(212, 175, 55, 0.15);
+}
+.admin-tab-btn:hover i {
+  transform: scale(1.1);
+}
+.admin-tab-btn.active {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #f0c84a !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.12);
+}
+.admin-tab-btn.active i {
+  color: #f0c84a !important;
+}
