@@ -6,7 +6,6 @@ export default function Authors() {
       name: 'Dr. Vasudha Narayanan',
       role: 'Vedic Scholar',
       books: '12 Books',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Gatto_europeo4.jpg/800px-Gatto_europeo4.jpg',
       img: 'https://i.pravatar.cc/200?img=47',
     },
     {
