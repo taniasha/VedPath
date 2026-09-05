@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AdminBooks from './AdminBooks';
 import AdminTrending from './AdminTrending';
@@ -39,13 +39,13 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="section-dark" style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className="section-dark" style={{ marginTop: '-64px', minHeight: '100vh' }}>
       <div className="container-fluid px-0">
         <div className="row g-0">
 
           {/* Sidebar */}
           <nav className="col-12 col-md-4 col-lg-3 col-xl-2 admin-sidebar d-flex flex-column justify-content-between"
-            style={{ minHeight: 'calc(100vh - 64px)' }}>
+            style={{ minHeight: '100vh', paddingTop: '1.5rem' }}>
             <div>
               <div className="px-2 mb-4 pb-3" style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
                 <h4 className="font-cinzel fw-bold mb-1 d-flex align-items-center gap-2" style={{ color: '#d4af37', fontSize: '1.25rem' }}>
@@ -72,10 +72,6 @@ export default function AdminPanel() {
 
             {/* Sidebar Footer */}
             <div className="pt-3 mt-4" style={{ borderTop: '1px solid rgba(212,175,55,0.15)' }}>
-              <Link to="/" className="admin-tab-btn mb-2">
-                <i className="bi bi-shop" />
-                <span>View Store</span>
-              </Link>
               <button onClick={handleLogout} className="admin-tab-btn" style={{ color: '#e57373' }}>
                 <i className="bi bi-box-arrow-right" style={{ color: '#e57373' }} />
                 <span>Logout</span>
@@ -84,24 +80,16 @@ export default function AdminPanel() {
           </nav>
 
           {/* Main Dashboard Area */}
-          <main className="col-12 col-md-8 col-lg-9 col-xl-10 p-3 p-sm-4 p-lg-5" style={{ minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+          <main className="col-12 col-md-8 col-lg-9 col-xl-10 p-3 p-sm-4 p-lg-4" style={{ minHeight: '100vh', overflowY: 'auto' }}>
             <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 gap-3"
               style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
               <div>
-                <span className="badge px-3 py-1 mb-2"
-                  style={{ background: 'rgba(212,175,55,0.15)', color: '#d4af37', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '20px', fontSize: '0.75rem' }}>
-                  ADMINISTRATOR PORTAL
-                </span>
                 <h2 className="font-cinzel fw-bold mb-0" style={{ color: '#f5e6c8', fontSize: '1.75rem' }}>
                   {navItems.find(i => i.id === activeTab)?.label}
                 </h2>
               </div>
 
               <div className="d-flex gap-2 align-items-center">
-                <Link to="/" className="btn-gold-outline py-2 px-3 d-none d-sm-inline-flex align-items-center gap-2"
-                  style={{ borderRadius: '8px', fontSize: '0.85rem' }}>
-                  <i className="bi bi-arrow-left" /> View Store
-                </Link>
                 <button className="btn-gold-outline py-2 px-3 d-inline-flex align-items-center gap-2"
                   style={{ borderRadius: '8px', fontSize: '0.85rem', color: '#e57373', borderColor: 'rgba(229,115,115,0.4)' }}
                   onClick={handleLogout}>
