@@ -7,64 +7,49 @@ export default function AudioLibrary() {
   const [playingId, setPlayingId] = useState(null);
   const audioRefs = useRef({});
 
-  // Fetch audio data from backend
   useEffect(() => {
-    const fetchAudios = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/audio/fetch-audio`)
-        setAudios(res.data.audio);
-      } catch (e) {
-        console.error("Error fetching audios", e);
-      }
-    };
-    fetchAudios();
+    axios.get(`${API_URL}/audio/fetch-audio`)
+      .then(res => setAudios(res.data.audio))
+      .catch(e => console.error('Error fetching audios', e));
   }, []);
 
-  // Play or pause selected audio, pause others
   const togglePlay = (id, url) => {
-    // Pause other audios
-    Object.keys(audioRefs.current).forEach((key) => {
-      if (key !== id && audioRefs.current[key]) {
-        audioRefs.current[key].pause();
-      }
+    Object.keys(audioRefs.current).forEach(key => {
+      if (key !== id && audioRefs.current[key]) audioRefs.current[key].pause();
     });
-
-    const currentAudio = audioRefs.current[id];
-
-    if (!currentAudio) {
-      // First time: create and play
-      const newAudio = new Audio(url);
-      audioRefs.current[id] = newAudio;
-      newAudio.play();
+    const current = audioRefs.current[id];
+    if (!current) {
+      const audio = new Audio(url);
+      audioRefs.current[id] = audio;
+      audio.play();
       setPlayingId(id);
-
-      newAudio.onended = () => setPlayingId(null);
+      audio.onended = () => setPlayingId(null);
     } else {
-      // Toggle play/pause
-      if (!currentAudio.paused) {
-        currentAudio.pause();
-        setPlayingId(null);
-      } else {
-        currentAudio.play();
-        setPlayingId(id);
-        currentAudio.onended = () => setPlayingId(null);
-      }
+      if (!current.paused) { current.pause(); setPlayingId(null); }
+      else { current.play(); setPlayingId(id); current.onended = () => setPlayingId(null); }
     }
   };
 
   return (
-    <div className="container mt-5 mb-4 justify-content-center" style={{backgroundColor:'#f1e1caff', borderRadius:'4%'}}>
-      <h2 className="text-center text-dark mb-5 fw-bold pt-3"> <i className="bi bi-headphones fs-1x admin-icon" style={{fontSize:'40px'}}></i> Listen to Mantras For Free</h2>
-      <div className="row justify-content-center pb-4">
-        {audios.map((audio) => (
-          <div className="col-md-4 col-lg-4 col-sm-6 mb-4" key={audio._id}>
-            <div className="card shadow border-primary mx-auto">
-              <div className="card-body">
-                <h5 className="card-title">{audio.title}</h5>
-                <p className="card-text text-muted">{audio.scripture}</p>
-                <div className="d-flex align-items-center gap-1 text-center">
+    <div className="section-dark py-5 px-3" style={{ minHeight: '60vh' }}>
+      <div className="container">
+        <h2 className="section-heading mb-2">
+          <i className="bi bi-headphones me-2" />Listen to Mantras For Free
+        </h2>
+        <div className="gold-divider mb-5" />
+
+        <div className="row justify-content-center g-4">
+          {audios.map(audio => (
+            <div key={audio._id} className="col-12 col-sm-6 col-lg-4">
+              <div className="glass-card p-4 h-100">
+                <h5 className="font-cinzel fw-semibold mb-1" style={{ color: '#f5e6c8', fontSize: '0.95rem' }}>
+                  {audio.title}
+                </h5>
+                <p className="mb-3" style={{ color: '#9e8a6e', fontSize: '0.85rem' }}>{audio.scripture}</p>
+                <div className="d-flex gap-2">
                   <button
-                    className="btn book-btn p-1"
+                    className="btn-gold py-2 px-3 flex-fill"
+                    style={{ borderRadius: '8px', fontSize: '0.85rem' }}
                     onClick={() => togglePlay(audio._id, audio.audioUrl)}
                   >
                     {playingId === audio._id ? '⏸ Pause' : '▶ Play'}
@@ -73,15 +58,16 @@ export default function AudioLibrary() {
                     href={audio.audioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn book-btn p-1"
+                    className="btn-gold-outline py-2 px-3 flex-fill text-center"
+                    style={{ borderRadius: '8px', fontSize: '0.85rem', display: 'inline-block' }}
                   >
                     Open Link
                   </a>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

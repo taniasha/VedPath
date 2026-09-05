@@ -1,127 +1,102 @@
-import axios from "axios";
-import { useState, useEffect, useContext } from "react";
-import { useRef } from "react";
-import "../index.css";
-import { Link, useNavigate } from "react-router-dom";
-import DisplayTrendingBooks from "./DisplayTrendingBooks";
-import ThemeContext from "../context/ThemeContext";
+import axios from 'axios';
+import { useState, useEffect, useRef } from 'react';
+import DisplayTrendingBooks from './DisplayTrendingBooks';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Trending() {
-  const {theme} = useContext(ThemeContext);
   const [trendings, setTrending] = useState([]);
-  const[selectedBookId, setSelectedBookId] = useState(null);
-  const navigate = useNavigate();
+  const [selectedBookId, setSelectedBookId] = useState(null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/trending/showtrending`)
-      .then((response) => {
-        setTrending(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    axios.get(`${API_URL}/trending/showtrending`)
+      .then(res => setTrending(res.data))
+      .catch(e => console.log(e));
   }, []);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -250, behavior: "smooth" });
+  const scrollLeft = () => scrollRef.current.scrollBy({ left: -270, behavior: 'smooth' });
+  const scrollRight = () => scrollRef.current.scrollBy({ left: 270, behavior: 'smooth' });
+
+  const scrollBtnStyle = {
+    background: 'rgba(212,175,55,0.12)',
+    border: '1px solid rgba(212,175,55,0.3)',
+    borderRadius: '50%',
+    width: '40px', height: '40px',
+    color: '#d4af37',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    cursor: 'pointer', fontSize: '1.1rem', flexShrink: 0,
+    transition: 'transform 0.2s',
   };
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 250, behavior: "smooth" });
-  };
-
-  // const handleSubmit=(id)=>{
-  //   navigate(`/trending/${id}`);
-  // };
-
-  const handleCardClick=(id)=>{
-    setSelectedBookId(id); //open modal with this book id
-  };
-
-  const handleClose=()=>{
-    setSelectedBookId(null); //close modal
-  }
   return (
     <>
+      <section className="section-dark-alt py-5">
+        <div className="container">
+          <h2 className="section-heading mb-2">Trending Books</h2>
+          <div className="gold-divider mb-5" />
 
-    {/* Trendingsection */}
-      <div className="trending-section mt-5 mb-3 container" style={{overflow:'hidden'}}>
-        <h2 className="text-center mb-4 fw-bold page-heading" style={{color: theme==='dark' ? 'white': '#3E2723', fontFamily: "'Niconne', cursive", fontSize: '46px'}}> Trending Books</h2>
-       {/* <h2 className="text-center mb-4 fw-bold d-flex align-items-center" style={{backgroundColor:'#3E2723', width:'100%', height:'3.5rem', color:'white'}}>🔥 Trending Books</h2> */}
+          <div className="d-flex align-items-center gap-3">
+            <button style={scrollBtnStyle} onClick={scrollLeft}>&#10094;</button>
 
-         <div className="scroll-wrapper position-relative">
-          {/* Scroll Left Button */}
-          <button className="btn btn-light scroll-btn left" onClick={scrollLeft}>
-            &#10094;
-          </button>
+            <div
+              ref={scrollRef}
+              className="d-flex scroll-container gap-3 py-2"
+              style={{ overflowX: 'auto', flex: 1 }}
+            >
+              {trendings.map(trending => (
+                <div
+                  key={trending._id}
+                  className="glass-card flex-shrink-0 text-center"
+                  style={{ width: '175px', cursor: 'pointer' }}
+                  onClick={() => setSelectedBookId(trending._id)}
+                >
+                  <img
+                    src={trending.image}
+                    alt={trending.title}
+                    className="w-100 object-fit-contain"
+                    style={{ height: '190px', background: 'rgba(255,255,255,0.02)' }}
+                  />
+                  <div className="p-3">
+                    <h6 className="font-cinzel fw-semibold mb-1" style={{ color: '#f5e6c8', fontSize: '0.78rem', lineHeight: 1.3 }}>
+                      {trending.title}
+                    </h6>
+                    <p className="mb-1" style={{ color: '#9e8a6e', fontSize: '0.75rem' }}>{trending.author}</p>
+                    <p className="fw-bold mb-2" style={{ color: '#d4af37', fontSize: '0.9rem' }}>₹{trending.price}</p>
+                    <div className="d-flex justify-content-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`bi ${i < trending.rating ? 'bi-star-fill' : 'bi-star'}`}
+                          style={{ color: i < trending.rating ? '#FFD700' : '#555', fontSize: '0.7rem' }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          {/* Scrollable Card Container */}
-        <div className="d-flex overflow-x-auto overflow-y-hidden scroll-container " ref={scrollRef} style={{ scrollBehavior: 'smooth', gap: '1rem' }} >
-          {trendings.map((trending) => (
-            <div className="card trending-card flex-shrink-0" style={{ width: "13rem" }} key={trending._id} onClick={() => handleCardClick(trending._id)} >
-              <img src={trending.image} className="card-img-top" alt={trending.title} style={{ height: "200px", objectFit: "contain" }}/>
+            <button style={scrollBtnStyle} onClick={scrollRight}>&#10095;</button>
+          </div>
+        </div>
 
-              <div className="card-body text-center p-2">
-                  <h6 className="card-title mb-1">{trending.title}</h6>
-                  <p className="card-text mb-1 text-muted">{trending.author}</p>
-                  <p className="fw-bold text-brown mb-1">₹{trending.price}</p>
-                  <div className="rating">
-                    {[...Array(5)].map((_, i) => (
-                      <i
-                      key={i}
-                      className={`bi ${i < trending.rating ? 'bi-star-fill' : 'bi-star'}`}
-                      style={{ color: i < trending.rating ? '#FFD700' : '#ccc' }}
-                      ></i>
-                    ))}
+        {/* Decorative images */}
+        <div className="container mt-5">
+          <div className="row g-4 justify-content-center">
+            {[
+              { src: 'https://vediccosmos.com/wp-content/uploads/2023/04/Hanuman-Chalisa-Library-Edition-600x600.png', alt: 'Hanuman Chalisa' },
+              { src: 'https://vediccosmos.com/wp-content/uploads/2023/04/sri-yantra-600x600.png', alt: 'Sri Yantra' },
+            ].map(img => (
+              <div key={img.alt} className="col-md-5 d-flex justify-content-center">
+                <div className="glass-card p-3 text-center" style={{ maxWidth: '380px', width: '100%' }}>
+                  <img src={img.src} alt={img.alt} className="img-fluid rounded-3" style={{ maxHeight: '260px', objectFit: 'contain' }} />
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Scroll Right Button */}
-        <button className="btn btn-light scroll-btn right" onClick={scrollRight}>
-          &#10095;
-        </button>
-     </div>
-   </div>
-
-
-   {/* Popup modal when a card is clicked */}
-       {selectedBookId && (
-        <DisplayTrendingBooks id={selectedBookId} onClose={handleClose}/>
-       )}
-
-
-      {/* Atrractive-section */}
-    <section className="container my-5 attractive-section">
-        <div className="row g-4">
-            <div className="col-lg-6 d-flex justify-content-center">
-                <div className="image-card">
-                    <img
-                    src="https://vediccosmos.com/wp-content/uploads/2023/04/Hanuman-Chalisa-Library-Edition-600x600.png"
-                    alt="Hanuman Chalisa"
-                    className="img-fluid"
-                    />
-                </div>
-            </div>
-            <div className="col-lg-6 d-flex justify-content-center">
-                <div className="image-card">
-                    <img
-                    src="https://vediccosmos.com/wp-content/uploads/2023/04/sri-yantra-600x600.png"
-                    alt="Sri Yantra"
-                    className="img-fluid"
-                    />
-                </div>
-            </div>
-        </div>
-    </section>
-
-          
-     
+      {selectedBookId && (
+        <DisplayTrendingBooks id={selectedBookId} onClose={() => setSelectedBookId(null)} />
+      )}
     </>
   );
 }

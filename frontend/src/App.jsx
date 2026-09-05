@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
-import {ThemeProvider}  from './context/ThemeContext';
+
 import { CartProvider } from './context/CartContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
@@ -42,14 +42,10 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 
 
-  //  const [theme,setTheme] = useState('dark'); //globally manage krna hai taki sabhi componenet k pas ye jaye
-  //  const [auth, setAuth] = useState(true);
 
   return (
    <>                      
-    {/* we r wrapping our all routes will themecontext.provider and data(value) so that it will be accessible globally */}
             <BrowserRouter>
-    <ThemeProvider>
       <AuthProvider>
         <CartProvider>
            {!user || user?.email !== 'vedpath@gmail.com' ? <Navbar /> : null}
@@ -74,7 +70,7 @@ const user = JSON.parse(localStorage.getItem("user"));
               <Footer />
         </CartProvider>
       </AuthProvider>
-    </ThemeProvider>
+
             </BrowserRouter>
    </>
   )

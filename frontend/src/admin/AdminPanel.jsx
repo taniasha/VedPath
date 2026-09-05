@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import AdminBooks from './AdminBooks';
 import AdminTrending from './AdminTrending';
 import AdminAudio from './AdminAudio';
@@ -7,12 +9,14 @@ import AdminUsers from './AdminUsers';
 import { useAuth } from '../context/AuthContext';
 
 export default function AdminPanel() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('books');
   const {logout} = useAuth();
 
   const handleLogout=()=>{
      logout();
-     toast.success("Logout successfull");
+     toast.success("Logout successful");
+     navigate('/login');
   }
 
   const renderContent = () => {
