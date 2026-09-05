@@ -21,7 +21,7 @@ export default function Home() {
         {/* Background image — zoom animation isolated here */}
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: "url('/assets/Vedpathbanner.png')",
+          backgroundImage: "url('/assets/Vedpathbanner.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           animation: 'zoom 15s infinite alternate ease-in-out',

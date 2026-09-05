@@ -5,9 +5,11 @@ export default function AudioPromo() {
   return (
     <div className="audio-banner my-4">
       <img
-        src="/assets/Gemini_Generated_Image_gxcs21gxcs21gxcs.png"
+        src="/assets/music_banner.jpg"
         alt="Cosmic Vibes"
         className="audio-bg-img"
+        loading="lazy"
+        decoding="async"
       />
       <div className="audio-content text-center px-3">
         <h2 className="heading-glow mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.2rem)' }}>

@@ -245,7 +245,7 @@ a, a:hover, a:focus, a:visited {
 
 /* ─── Hero Banner ─── */
 .hero-banner {
-  background-image: url('/assets/Vedpathbanner.png');
+  background-image: url('/assets/Vedpathbanner.jpg');
   background-size: cover;
   background-position: center;
   height: 560px;
